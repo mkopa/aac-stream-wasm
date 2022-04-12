@@ -1,16 +1,16 @@
 import {
-  withGreeter,
-  withGreeterScope,
-  Greeter,
-  persistGreeterValue,
+  withAACCodec,
+  withAACCodecScope,
+  AACCodec,
+  persistAACCodecValue,
   LanguageCode,
-  deleteGreeterValue,
+  deleteAACCodecValue,
 } from "../source";
 
 test("Calling wasm methods", async () => {
-  await withGreeter((greeterModule) => {
-    const greeter = new greeterModule.Greeter("Wasm");
-    expect(greeter.greet(greeterModule.LanguageCode.EN)).toBe("Hello, Wasm!");
+  await withAACCodec((aaccodecModule) => {
+    const greeter = new aaccodecModule.AACCodec("Wasm");
+    expect(greeter.greet(aaccodecModule.LanguageCode.EN)).toBe("Hello, Wasm!");
   });
 });
 
@@ -22,17 +22,17 @@ import {
 
 test("Scoping", async () => {
   expect(__getCurrentWasmScopeStackSize()).toBe(0);
-  await withGreeter((greeterModule) => {
+  await withAACCodec((greeterModule) => {
     expect(__getCurrentWasmScopeStackSize()).toBe(1);
     expect(__getCurrentWasmScope().length).toBe(0);
-    new greeterModule.Greeter("Outer");
+    new greeterModule.AACCodec("Outer");
     expect(__getCurrentWasmScope().length).toBe(1);
-    withGreeterScope(() => {
+    withAACCodecScope(() => {
       expect(__getCurrentWasmScopeStackSize()).toBe(2);
       expect(__getCurrentWasmScope().length).toBe(0);
-      new greeterModule.Greeter("Inner 1");
+      new greeterModule.AACCodec("Inner 1");
       expect(__getCurrentWasmScope().length).toBe(1);
-      new greeterModule.Greeter("Inner 2");
+      new greeterModule.AACCodec("Inner 2");
       expect(__getCurrentWasmScope().length).toBe(2);
     });
     expect(__getCurrentWasmScopeStackSize()).toBe(1);
@@ -41,15 +41,15 @@ test("Scoping", async () => {
 });
 
 test("Persisting values", async () => {
-  let greeter: Greeter;
+  let aaccodec: AACCodec;
   let language: LanguageCode;
 
-  await withGreeter((greeterModule) => {
-    greeter = persistGreeterValue(new greeterModule.Greeter("Global"));
+  await withAACCodec((greeterModule) => {
+    aaccodec = persistAACCodecValue(new greeterModule.AACCodec("Global"));
     language = greeterModule.LanguageCode.EN;
     expect(__getCurrentWasmScope().length).toBe(0);
   }).then(() => {
-    expect(greeter.greet(language)).toBe("Hello, Global!");
-    deleteGreeterValue(greeter);
+    expect(aaccodec.greet(language)).toBe("Hello, Global!");
+    deleteAACCodecValue(aaccodec);
   });
 });

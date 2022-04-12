@@ -39,7 +39,7 @@ let wasmModule: PostRunModule | undefined;
 /**
  * Returns a promise that will resolve after the main method has finished
  */
-function getWasm() {
+export function getWasm() {
   if (wasmModule) {
     return Promise.resolve(wasmModule);
   } else {

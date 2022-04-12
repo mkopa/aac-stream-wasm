@@ -21,25 +21,25 @@ cpmaddpackage("gh:TheLartians/Format.cmake@1.7.2")
 
 # EmGlue is used to create the TypeScript declarations and the JavaScript
 # bindings
-cpmaddpackage("gh:TheLartians/EmGlue@0.6.1")
+cpmaddpackage("gh:mkopa/EmGlue@0.6.1")
 
 # using the ModernCppStarter as an example project for JS bindings replace this
 # with the library you want to use
-cpmaddpackage(NAME Greeter GITHUB_REPOSITORY TheLartians/ModernCppStarter
-              VERSION 0.17.3)
+cpmaddpackage(NAME AACCodec GITHUB_REPOSITORY mkopa/aac-codec
+               GIT_TAG master)
 
 # ---- Create wams glue library ----
 
 add_library(wasmGlue source/wasmGlue.cpp)
 set_target_properties(wasmGlue PROPERTIES CXX_STANDARD 17)
 
-# link dependencies, replace `Greeter::Greeter` with your library
-target_link_libraries(wasmGlue PUBLIC Glue Greeter::Greeter)
+# link dependencies, replace `AACCodec::AACCodec` with your library
+target_link_libraries(wasmGlue PUBLIC Glue AACCodec::AACCodec)
 
 # ---- Create main library ----
 
 set(EMSCRIPTEN_FLAGS
-    "-s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s \"EXPORTED_RUNTIME_METHODS=['addOnPostRun','callMain']\" -s MODULARIZE=1 -s SINGLE_FILE=1 -s INVOKE_RUN=0"
+    "-s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s \"EXPORTED_RUNTIME_METHODS=['addOnPostRun','callMain']\" -s MODULARIZE=1 -s SINGLE_FILE=1 -s INVOKE_RUN=0 -s ENVIRONMENT='web'"
 )
 
 add_executable(WasmModule source/main.cpp)

@@ -4,10 +4,17 @@
 
 #include "wasmGlue.h"
 
+// int addNumbers(int x, int y) {
+//   return x + y;
+// }
+
+
+
 int main() {
   auto element = wasmGlue();
   glue::emscripten::State state;
 
+  // element["AACCodec"] = 
   // EmGlue internal funcions
   element["setConstructCallback"] = state.getConstructCallbackSetter();
 

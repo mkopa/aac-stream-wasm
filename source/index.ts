@@ -1,9 +1,10 @@
 export {
-  withWasm as withGreeter,
-  withWasmScope as withGreeterScope,
-  persistWasmValue as persistGreeterValue,
-  deletePersistedValue as deleteGreeterValue,
-  GlueModule as GreeterModule,
+  withWasm as withAACCodec,
+  withWasmScope as withAACCodecScope,
+  persistWasmValue as persistAACCodecValue,
+  deletePersistedValue as deleteAACCodecValue,
+  GlueModule as AACCodecModule,
+  getWasm,
 } from "./wasmWrapper";
 
-export type { Greeter, LanguageCode } from "./WasmModule";
+export type { AACCodec, LanguageCode } from "./WasmModule";
