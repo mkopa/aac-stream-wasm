@@ -1,14 +1,26 @@
 /** @customConstructor AACCodec.__new */
 declare class AACCodec {
   private unique_2770090898231993425: "aaccodec::AACCodec"
-  constructor(arg0: string)
+  constructor()
+  aacEncodeB64(arg1: string): string
+  aacEncoderInit(arg1: number, arg2: number, arg3: number, arg4: number): number
   aacenc_close(): void
   aacenc_encode(arg1: unknown /* char * */, arg2: number, arg3: number, arg4: unknown /* char * */, arg5: number): number
   aacenc_frame_size(): number
   aacenc_init(arg1: number, arg2: number, arg3: number, arg4: number): number
   aacenc_max_output_buffer_size(): number
+  base64test(arg1: string): string
   greet(arg1: LanguageCode): string
-  sumArrayInt32(arg1: unknown /* int * */, arg2: number): number
+  sumArrayInt32(arg1: unknown /* signed char * */, arg2: number): number
+}
+/** @customConstructor Alloc.__new */
+declare class Alloc {
+  private unique_3378670364616043382: "Alloc"
+  constructor()
+  getMem(): unknown /* unsigned char * */
+  getStrLen(arg1: string): number
+  reverse(arg1: string): string
+  reverseBinary(arg1: unknown /* std::vector<unsigned char> */): unknown /* std::vector<unsigned char> */
 }
 declare class LanguageCode {
   private unique_10292993915453334805: "aaccodec::LanguageCode"
@@ -21,8 +33,9 @@ declare class LanguageCode {
 }
 
 export type GlueModule = {
-  LanguageCode: typeof LanguageCode;
   AACCodec: typeof AACCodec;
+  LanguageCode: typeof LanguageCode;
+  Alloc: typeof Alloc;
 }
 export type EmGlueModule = {
   setConstructCallback: (callback: (v: {delete(): void}) => void) => void;

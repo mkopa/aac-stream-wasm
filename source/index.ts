@@ -7,4 +7,4 @@ export {
   getWasm,
 } from "./wasmWrapper";
 
-export type { AACCodec, LanguageCode } from "./WasmModule";
+export type { AACCodec, LanguageCode, Alloc } from "./WasmModule";
