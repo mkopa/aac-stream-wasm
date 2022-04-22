@@ -106,6 +106,8 @@ glue::MapValue wasmGlue() {
     .addMethod("aacEncoderInit", &AACCodec::aacEncoderInit)
     .addMethod("aacEncodeB64", &AACCodec::aacEncodeB64)
     .addMethod("base64test", &AACCodec::base64test)
+    .addMethod("aacDecoderInit", &AACCodec::aacDecoderInit)
+    .addMethod("aacDecodeB64", &AACCodec::aacDecodeB64)
     // .addMethod("base64test", &AACCodec::base64test)
   ;
 

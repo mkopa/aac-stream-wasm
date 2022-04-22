@@ -2,6 +2,8 @@
 declare class AACCodec {
   private unique_2770090898231993425: "aaccodec::AACCodec"
   constructor()
+  aacDecodeB64(arg1: string): string
+  aacDecoderInit(arg1: number): number
   aacEncodeB64(arg1: string): string
   aacEncoderInit(arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): number
   aacenc_close(): void
